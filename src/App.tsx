@@ -1,30 +1,17 @@
-import { useEffect } from 'react'
-import TopBar from './components/topBar'
-import LeftBar from './components/leftBar'
-import RightBar from './components/rightBar'
-import { DomNode } from './logic/domtree'
+import Leftbar from "./components/leftbar";
+import Navbar from "./components/navbar";
+import Rightbar from "./components/rightbar";
+import Viewport from "./components/viewport";
 
-function App() {
-
-  useEffect(() => {
-    let test = new DomNode()
-    test.name = "div"
-    test.setDimensions({ width: "100px", height: "100px" })
-    console.log(test.getHTML())
-  }, [])
-
+export default function App() {
   return (
-    <div className="bg-gray-200 h-screen">
-      <TopBar />
-      <div className="flex">
-        <LeftBar />
-        <div className='flex-grow'>
-          <div></div>
-        </div>
-        <RightBar />
+    <div className="flex flex-col w-screen h-screen bg-level-0">
+      <Navbar />
+      <div className="flex flex-grow">
+        <Leftbar />
+        <Viewport />
+        <Rightbar />
       </div>
     </div>
   )
 }
-
-export default App
