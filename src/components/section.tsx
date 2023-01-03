@@ -5,7 +5,7 @@ interface SectionProps {
 }
 export function Section(props: React.PropsWithChildren<SectionProps>) {
     return (
-        <div className="p-4">
+        <div className="px-4 pb-4">
             <div className="font-bold text-gray-200">{props.title}</div>
             <div>{props.children}</div>
         </div>
