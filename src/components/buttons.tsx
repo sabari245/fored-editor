@@ -5,7 +5,23 @@ interface ButtonProps {
 }
 export function Button(props: React.PropsWithChildren<ButtonProps>) {
     return (
-        <div className="flex justify-center items-center h-8 px-4 mx-2 bg-primary text-white font-normal rounded-lg gap-1">{props.children}</div>
+        <div className="relative flex justify-center items-center h-8 px-4 mx-2 bg-primary text-white font-normal rounded-lg gap-1">{props.children}</div>
+    )
+}
+
+interface IconButtonProps {
+}
+export function IconButton(props: React.PropsWithChildren<IconButtonProps>) {
+    return (
+        <div className="relative flex justify-center items-center h-8 w-8 mx-2 bg-primary text-white font-normal rounded-full gap-1">{props.children}</div>
+    )
+}
+
+interface SecondaryIconButtonProps {
+}
+export function SecondaryIconButton(props: React.PropsWithChildren<SecondaryIconButtonProps>) {
+    return (
+        <div className="relative flex justify-center items-center h-8 w-8 mx-2 bg-level-4 text-white font-normal rounded-full gap-1">{props.children}</div>
     )
 }
 
@@ -13,7 +29,7 @@ interface SecondaryButtonProps {
 }
 export function SecondaryButton(props: React.PropsWithChildren<SecondaryButtonProps>) {
     return (
-        <div className="flex justify-center items-center h-8 px-4 mx-2 bg-level-4 text-white font-normal rounded-lg gap-1">{props.children}</div>
+        <div className="relative flex justify-center items-center h-8 px-4 mx-2 bg-level-4 text-white font-normal rounded-lg gap-1">{props.children}</div>
     )
 }
 
@@ -34,7 +50,7 @@ export function ButtonGroup(props: React.PropsWithChildren<ButtonGroupProps>) {
         setWidth(maxWidth + 32);
     })
     return (
-        <div className="flex w-full justify-center">
+        <div className="relative flex w-full justify-center">
             {props.titles.map((title, index) => {
                 if (index === props.active) {
                     if (index === 0) {
