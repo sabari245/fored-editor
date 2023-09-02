@@ -1,20 +1,16 @@
-import { useState, useEffect } from "react";
-import { createElement } from "./scripts/dom.ts";
+import { VDom } from "./scripts/vdom.ts";
 
 function App() {
-  const [html, setHtml] = useState<string>("");
-  let root: HTMLElement | null = null;
-
-  useEffect(() => {
-    root = createElement({
-      tag: "div",
-      content: "Hello world",
-    });
-  }, []);
+  const root = new VDom("div", "Hello World");
+  const visualHTML = root.useVisualHTML();
 
   return (
     <>
-      <div>Hello world</div>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: visualHTML,
+        }}
+      ></div>
     </>
   );
 }
