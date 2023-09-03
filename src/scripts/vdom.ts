@@ -1,14 +1,22 @@
+import { IElementTree } from "@/utils/utils.ts";
 import {useState} from "react"
 
 class VDom {
     // states
-    visualHtmlState: [string, React.Dispatch<React.SetStateAction<string>>]
+    visualHtmlState: [string, React.Dispatch<React.SetStateAction<string>>];
+    elementTreeState: [IElementTree, React.Dispatch<React.SetStateAction<IElementTree>>];
     tag: keyof HTMLElementTagNameMap;
     content: string | VDom[] | undefined;
     constructor (tag: keyof HTMLElementTagNameMap, content: string | VDom[] | undefined){
         this.tag = tag;
         this.content = content;
         this.visualHtmlState = useState<string>(this.getVisualHTML());
+        this.elementTreeState = useState<IElementTree>(this.getElementTree());
+    }
+
+    refreshStates() {
+        this.visualHtmlState[1](this.getVisualHTML());
+        this.elementTreeState[1](this.getElementTree());
     }
 
     buildElement(): HTMLElement {
@@ -38,8 +46,19 @@ class VDom {
         return this.buildElement().innerHTML;
     }
 
+    getElementTree(): IElementTree {
+        let res: IElementTree = {
+            name: this.tag,
+            children: (typeof this.content === "string" || typeof this.content === "undefined") ? [] : this.content.map(e=>e.getElementTree())
+        }
+        return res;
+    }
+
     useVisualHTML(){
         return this.visualHtmlState[0];
+    }
+    useElementTree(){
+        return this.elementTreeState[0];
     }
 }
 
